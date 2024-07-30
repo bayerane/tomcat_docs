@@ -43,7 +43,7 @@ Téléchargez la dernière version de Tomcat 9 :
 - Créer un fichier de service Systemd :
 ```bash
     sudo nano ~/.bashrc
-    ource ~/.bashrc
+    source ~/.bashrc
 ```
 
 - Ajoutez le contenu suivant :
