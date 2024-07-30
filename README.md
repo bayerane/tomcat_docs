@@ -30,56 +30,31 @@ Téléchargez la dernière version de Tomcat 9 :
     tar xzf apache-tomcat-9.0.65.tar.gz
 ```
 
-- Déplacer Tomcat vers le répertoire `/opt` :
+- Déplacer Tomcat vers le répertoire `/Documents` :
 ```bash
-    sudo mv apache-tomcat-9.0.65 /opt/tomcat
+    sudo mv apache-tomcat-9.0.65 /Documents/
 ```
 
 - Définir les permissions :
 ```bash
-    sudo chown -R $USER:$USER /opt/tomcat
-    chmod +x /opt/tomcat/bin/*.sh
+    chmod +x /Documetns/apache-tomcat-9.0.65/bin/*.sh
 ```
 
 - Créer un fichier de service Systemd :
 ```bash
-    sudo nano /etc/systemd/system/tomcat.service
+    sudo nano ~/.bashrc
+    ource ~/.bashrc
 ```
 
 - Ajoutez le contenu suivant :
 ```ini
-    [Unit]
-    Description=Apache Tomcat Web Application Container
-    After=network.target
-
-    [Service]
-    Type=forking
-
-    Environment=JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-    Environment=CATALINA_PID=/opt/tomcat/temp/tomcat.pid
-    Environment=CATALINA_HOME=/opt/tomcat
-    Environment=CATALINA_BASE=/opt/tomcat
-    Environment='CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC'
-    Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom'
-
-    ExecStart=/opt/tomcat/bin/startup.sh
-    ExecStop=/opt/tomcat/bin/shutdown.sh
-
-    User=tomcat
-    Group=tomcat
-    UMask=0007
-    RestartSec=10
-    Restart=always
-
-    [Install]
-    WantedBy=multi-user.target
+    export CATALINA_HOME=~/Documents/apache-tomcat-9.0.65
+    export PATH=$PATH:$CATALINA_HOME/bin
 ```
 
 - Recharger Systemd et démarrer Tomcat :
 ```bash
-    sudo systemctl daemon-reload
-    sudo systemctl start tomcat
-    sudo systemctl enable tomcat
+    startup.sh
 ```
 
 - Vérifier l'installation :
@@ -88,27 +63,11 @@ Ouvrez votre navigateur et allez sur http://localhost:8080.
 ### Désinstallation sous ubuntu
 - Arrêter le service Tomcat :
 ```bash
-    sudo systemctl stop tomcat
+    shutdown.sh
 ```
-
-- Désactiver le service Tomcat :
-```bash
-    sudo systemctl disable tomcat
-```
-
 - Supprimer les fichiers Tomcat :
 ```bash
-    sudo rm -rf /opt/tomcat
-```
-
-- Supprimer le fichier de service Systemd :
-```bash
-    sudo rm /etc/systemd/system/tomcat.service
-```
-
-- Recharger Systemd :
-```bash
-    sudo systemctl daemon-reload
+    sudo rm -rf /Documetns/apache-tomcat-9.0.65/
 ```
 
 ## Windows 11
